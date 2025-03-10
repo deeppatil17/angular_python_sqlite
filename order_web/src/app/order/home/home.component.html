@@ -1,0 +1,69 @@
+
+<div class="container" style="width: 777px;margin-top:20px;margin-left:30px">
+    <h5 style="color: blueviolet;text-align: center;">Full Stack Application with Angular 18, Python & SQLite</h5>
+    <br>
+    <mat-form-field style="width: 175px;height: 63px;">
+        <input matInput type="text" name="product" [(ngModel)]="order.product" id="product" placeholder="Enter product">
+        <mat-icon fontIcon="store" matSuffix></mat-icon>
+    </mat-form-field>
+    <mat-form-field style="width: 175px;height: 63px;margin-left:15px;">
+        <input matInput type="text" name="quantity" [(ngModel)]="order.quantity" id="quantity" placeholder="Enter quantity">
+        <mat-icon fontIcon="quantity" matSuffix></mat-icon>
+    </mat-form-field>
+    <mat-form-field style="width: 175px;height: 63px;margin-left:15px;">
+        <input matInput type="text" name="price" id="price"  [(ngModel)]="order.price" placeholder="Enter price">
+        <mat-icon fontIcon="monetization_on" matSuffix></mat-icon>
+    </mat-form-field>
+    <button mat-flat-button  style="margin-left:25px;background-color: #6200ea;" (click)="addEditOrder(order)">Add</button>
+    <button mat-flat-button style="margin-left:10px;background-color:red">Cancel</button>
+    <mat-form-field style="width: 175px;height: 63px;">
+        <input matInput type="text" name="searchorder" id="searchorder" (input)="searchOrders(filter.value)" placeholder="Search Order" #filter>
+        <mat-icon fontIcon="search" matSuffix></mat-icon>
+    </mat-form-field>
+    <br>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+          <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Product </th>
+          <td mat-cell *matCellDef="let order"> {{order.product}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Qunatity </th>
+          <td mat-cell *matCellDef="let order"> {{order.quantity}} </td>
+        </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+          <td mat-cell *matCellDef="let order"> {{order.price}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Edit </th>
+            <td mat-cell *matCellDef="let order"> <button mat-flat-button style="height: 27px;width: auto;background-color: #6200ea;" (click)="setOrder(order)">Edit</button> </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td mat-cell *matCellDef="let order"> <button mat-flat-button style="height: 27px;width: auto;background-color: red;" (click)="deleteOrder(order.id)">Delete</button> </td>
+          </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let orders; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[4, 8, 12]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+     </mat-paginator>
+</div>
